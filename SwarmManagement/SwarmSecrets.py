@@ -10,18 +10,19 @@ def GetInfoMsg():
     infoMsg += "<secret_name>: <secret_file>\r\n"
     infoMsg += "Example: \r\n"
     infoMsg += "secrets: <secret_name>: <secret_file>\r\n"
-    infoMsg += "Create or remove a secret by adding '-secret -c/-create <secret_name>' or 'secret -r/-remove <secret_name>' to the arguments\r\n"
-    infoMsg += "Create or remove all secrets by adding '-secret -c/-create --all' or 'secret -r/-remove --all' to the arguments\r\n"
+    infoMsg += "Create or remove a secret by adding '-secret -c/-create <secret_name>' or 'secret -rm/-remove <secret_name>' to the arguments\r\n"
+    infoMsg += "Create or remove all secrets by adding '-secret -c/-create all' or 'secret -rm/-remove all' to the arguments\r\n"
     return infoMsg
 
 
 def GetSecrets(arguments):
-    return SwarmTools.GetProperties(arguments, 'secrets', GetInfoMsg())
+    yamlData = SwarmTools.LoadYamlDataFromFiles(arguments)
+    return SwarmTools.GetProperties(arguments, 'secrets', GetInfoMsg(), yamlData)
 
 
 def CreateSecrets(secretsToCreate, secrets):
     for secretToCreate in secretsToCreate:
-        if secretToCreate == '--all':
+        if secretToCreate == 'all':
             for secret in secrets:
                 CreateSecret(secret, secrets[secret])
         else:
@@ -36,7 +37,7 @@ def CreateSecret(secretName, secretFile):
 
 def RemoveSecrets(secretsToRemove, secrets):
     for secretToRemove in secretsToRemove:
-        if secretToRemove == '--all':
+        if secretToRemove == 'all':
             for secret in secrets:
                 RemoveSecret(secret)
         else:
@@ -62,7 +63,7 @@ def HandleSecrets(arguments):
     secretsToCreate += SwarmTools.GetArgumentValues(arguments, '-c')
 
     secretsToRemove = SwarmTools.GetArgumentValues(arguments, '-remove')
-    secretsToRemove += SwarmTools.GetArgumentValues(arguments, '-r')
+    secretsToRemove += SwarmTools.GetArgumentValues(arguments, '-rm')
 
     secrets = GetSecrets(arguments)
 

@@ -1,6 +1,14 @@
 # Docker Swarm Management
+
+[![PyPI version](https://badge.fury.io/py/SwarmManagement.svg)](https://badge.fury.io/py/SwarmManagement)
+[![Build Status](https://travis-ci.com/DIPSAS/SwarmManagement.svg?branch=master)](https://travis-ci.com/DIPSAS/SwarmManagement)
+[![MIT license](http://img.shields.io/badge/license-MIT-brightgreen.svg)](http://opensource.org/licenses/MIT)
+
 Swarm Management is a python application, installed with pip.
 The application makes it easy to manage a Docker Swarm by configuring a single *.yml file describing which stacks to deploy, and which networks, configs or secrets to create.
+
+## Install Or Upgrade
+- pip install --upgrade SwarmManagement
 
 ## Example
 1. Install SwarmManagement with pip:
@@ -31,33 +39,33 @@ The application makes it easy to manage a Docker Swarm by configuring a single *
     - Deploy/Update or Remove a single stack:
         - -> SwarmManagement -stack -deploy `<stack_name>`
         - -> SwarmManagement -stack -remove `<stack_name>`
-        - Or deploy/remove all stacks with the `--all` attribute:
-            - -> SwarmManagement -stack -deploy --all
-            - -> SwarmManagement -stack -remove --all
+        - Or deploy/remove all stacks with the `all` attribute:
+            - -> SwarmManagement -stack -deploy all
+            - -> SwarmManagement -stack -remove all
     - Create or Remove a single network:
         - -> SwarmManagement -network -create `<network_name>`
         - -> SwarmManagement -network -remove `<network_name>`
-        - Or create/remove all networks with the `--all` attribute:
-            - -> SwarmManagement -network -create --all
-            - -> SwarmManagement -network -remove --all
+        - Or create/remove all networks with the `all` attribute:
+            - -> SwarmManagement -network -create all
+            - -> SwarmManagement -network -remove all
     - Create or Remove a single config:
         - -> SwarmManagement -config -create `<config_name>`
         - -> SwarmManagement -config -remove `<config_name>`
-        - Or create/remove all configs with the `--all` attribute:
-            - -> SwarmManagement -stack -create --all
-            - -> SwarmManagement -stack -remove --all
+        - Or create/remove all configs with the `all` attribute:
+            - -> SwarmManagement -stack -create all
+            - -> SwarmManagement -stack -remove all
     - Create or Remove a single secret:
         - -> SwarmManagement -secret -create `<secret_name>`
         - -> SwarmManagement -secret -remove `<secret_name>`
-        - Or create/remove all secrets with the `--all` attribute:
-            - -> SwarmManagement -secret -create --all
-            - -> SwarmManagement -secret -remove --all
+        - Or create/remove all secrets with the `all` attribute:
+            - -> SwarmManagement -secret -create all
+            - -> SwarmManagement -secret -remove all
     - Create or Remove a single volume:
         - -> SwarmManagement -volume -create `<volume_name>`
         - -> SwarmManagement -volume -remove `<volume_name>`
-        - Or create/remove all volumes with the `--all` attribute:
-            - -> SwarmManagement -volume -create --all
-            - -> SwarmManagement -volume -remove --all
+        - Or create/remove all volumes with the `all` attribute:
+            - -> SwarmManagement -volume -create all
+            - -> SwarmManagement -volume -remove all
     - SwarmManagement uses the `swarm-management.yml` file by default to configure the swarm.
         - Specify a single or multiple *.yml files to use for configuring the swarm using the `-f` attribute:
             - -> SwarmManagement -start -f swarm-stacks.yml -f swarm-networks.yml
@@ -69,15 +77,16 @@ The application makes it easy to manage a Docker Swarm by configuring a single *
         - -> SwarmManagement -secret -help
         - -> SwarmManagement -volume -help
 
+The SwarmManagement console command is also available as a short command with `swm`.
+
 Please have a look at an example of use here:
 - https://github.com/DIPSAS/SwarmManagement/tree/master/example
-
-## Install And/Or Upgrade
-- pip install --no-cache-dir --upgrade SwarmManagement
 
 ## Prerequisites
 - Docker:
     - https://www.docker.com/get-docker
+- Install Dependencies:
+    - pip install -r requirements.txt
 
 ## Additional Info
 - The pip package may be located at:
@@ -87,3 +96,6 @@ Please have a look at an example of use here:
 1. Configure setup.py with new version.
 2. Build: python setup.py bdist_wheel
 3. Publish: twine upload dist/*
+
+## Run Unit Tests
+- python -m unittest
