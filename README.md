@@ -1,7 +1,7 @@
 # Docker Swarm Management
 
 [![PyPI version](https://badge.fury.io/py/SwarmManagement.svg)](https://badge.fury.io/py/SwarmManagement)
-[![Build Status](https://travis-ci.com/DIPSAS/SwarmManagement.svg?branch=master)](https://travis-ci.com/DIPSAS/SwarmManagement)
+[![Build Status](https://travis-ci.com/hansehe/SwarmManagement.svg?branch=master)](https://travis-ci.com/hansehe/SwarmManagement)
 [![MIT license](http://img.shields.io/badge/license-MIT-brightgreen.svg)](http://opensource.org/licenses/MIT)
 
 Swarm Management is a python application, installed with pip.
@@ -90,7 +90,7 @@ The application makes it easy to manage a Docker Swarm by configuring a single *
         - -> swm -volume -help
 
 Please have a look at an example of use here:
-- https://github.com/DIPSAS/SwarmManagement/tree/master/example
+- https://github.com/hansehe/SwarmManagement/tree/master/example
 
 ## Section Features
 
