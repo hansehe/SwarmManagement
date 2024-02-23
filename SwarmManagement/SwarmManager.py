@@ -8,6 +8,7 @@ def GetInfoMsg():
     infoMsg += "Add '-start' to arguments to start swarm with all stacks deployed and properties created (networks, secrets, configs..).\r\n"
     infoMsg += "Add '-stop' to arguments to stop swarm with all stacks and properties removed.\r\n"
     infoMsg += "Add '-restart' to arguments to restart swarm.\r\n"
+    infoMsg += "Add '-wait' to arguments to wait for all services in the swarm to start.\r\n"
     infoMsg += "Otherwise:\r\n\r\n"
     infoMsg += "Deploy Or Remove Stacks:\r\n"
     infoMsg += SwarmStacks.GetInfoMsg() + "\r\n\r\n"
@@ -51,6 +52,21 @@ def RestartSwarm(arguments):
     StartSwarm(arguments)
 
 
+def WaitForHealthySwarm(arguments):
+    secTimeout = 120
+    intervalInSeconds = 1
+    serviceNames = []
+    waitArguments = SwarmTools.GetArgumentValues(arguments, '-wait')
+    for waitArgument in waitArguments:
+        if waitArgument.isdigit():
+            secTimeout = int(waitArgument)
+        else:
+            serviceNames.append(waitArgument)
+    if len(serviceNames) == 0:
+        serviceNames = None
+    DockerSwarmTools.WaitUntilSwarmServicesAreRunning(secTimeout, intervalInSeconds, serviceNames)
+
+
 def HandleManagement(arguments):
     if len(arguments) == 0:
         print(GetInfoMsg())
@@ -71,6 +87,8 @@ def HandleManagement(arguments):
         StopSwarm(arguments)
     elif '-restart' in arguments:
         RestartSwarm(arguments)
+    elif '-wait' in arguments:
+        WaitForHealthySwarm(arguments)
     else:
         SwarmVolumes.HandleVolumes(arguments)
         SwarmConfigs.HandleConfigs(arguments)

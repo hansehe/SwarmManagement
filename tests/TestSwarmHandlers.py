@@ -75,6 +75,10 @@ class TestSwarmHandlers(unittest.TestCase):
         SwarmManager.HandleManagement(arguments)
         arguments = ['-restart']
         SwarmManager.HandleManagement(arguments)
+        arguments = ['-wait', '10']
+        SwarmManager.HandleManagement(arguments)
+        arguments = ['-wait', '3', 'ssl_proxy_ssl-proxy-web']
+        SwarmManager.HandleManagement(arguments)
         arguments = ['-stop']
         SwarmManager.HandleManagement(arguments)
         os.chdir(cwd)

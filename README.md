@@ -48,6 +48,8 @@ The application makes it easy to manage a Docker Swarm by configuring a single *
         - -> swm -stop
     - Restart Swarm with:
         - -> swm -restart
+    - Wait for all services to start in Swarm with:
+        - -> swm -wait
     - Deploy/Update or Remove a single stack:
         - -> swm -stack -deploy `<stack_name>`
         - -> swm -stack -remove `<stack_name>`
@@ -97,6 +99,7 @@ Please have a look at an example of use here:
 ## Start/Stop or Restart Swarm
 Deploy the swarm with `swm -start`, and stop the swarm with `swm -stop`.
 Restart the swarm with `swm -restart <restart_delay_in_seconds>`. The `<restart_delay_in_seconds>` argument is optional, and defaults to 10 seconds if not given.
+Wait for all services in the swarm to start with `swm -wait <timeout_in_seconds> <service_to_target>`. The `<timeout_in_seconds>` argument is optional, and defaults to 120 seconds if not given. The `<service_to_target>` argument is optional, and is a list of specific service names to target.
 
 ### Stacks
 The `stacks` section lists all stacks to be deployed as: `<stack_name>: <compose_file>`
@@ -143,4 +146,4 @@ By convention, a present `.env` file will automatically be loaded.
 5. Publish: twine upload dist/*
 
 ## Run Unit Tests
-- python -m unittest
+- python -m unittest discover -p *Test*.py
