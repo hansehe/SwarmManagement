@@ -1,6 +1,9 @@
 from SwarmManagement import SwarmTools
 from DockerBuildSystem import DockerSwarmTools, YamlTools
 import sys
+import logging
+
+log = logging.getLogger(__name__)
 
 
 def GetInfoMsg():
@@ -66,7 +69,7 @@ def HandleNetworks(arguments):
         return
 
     if '-help' in arguments:
-        print(GetInfoMsg())
+        log.info(GetInfoMsg())
         return
 
     networksToCreate = SwarmTools.GetArgumentValues(arguments, '-create')

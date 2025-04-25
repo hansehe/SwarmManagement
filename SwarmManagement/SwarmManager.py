@@ -1,6 +1,9 @@
 import sys
+import logging
 from SwarmManagement import SwarmStacks, SwarmConfigs, SwarmSecrets, SwarmNetworks, SwarmVolumes, SwarmTools
 from DockerBuildSystem import DockerSwarmTools
+
+log = logging.getLogger(__name__)
 
 
 def GetInfoMsg():
@@ -69,7 +72,7 @@ def WaitForHealthySwarm(arguments):
 
 def HandleManagement(arguments):
     if len(arguments) == 0:
-        print(GetInfoMsg())
+        log.info(GetInfoMsg())
         return
 
     SwarmTools.LoadEnvironmentVariables(arguments)
@@ -80,7 +83,7 @@ def HandleManagement(arguments):
         and not('-config' in arguments) \
         and not('-secret' in arguments) \
         and not('-network' in arguments):
-        print(GetInfoMsg())
+        log.info(GetInfoMsg())
     elif '-start' in arguments:
         StartSwarm(arguments)
     elif '-stop' in arguments:

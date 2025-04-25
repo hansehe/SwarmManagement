@@ -1,5 +1,6 @@
 import unittest
 import os
+import logging
 from tests import TestTools
 from SwarmManagement import SwarmConfigs
 from SwarmManagement import SwarmSecrets
@@ -8,10 +9,13 @@ from SwarmManagement import SwarmNetworks
 from SwarmManagement import SwarmStacks
 from SwarmManagement import SwarmManager
 
+log = logging.getLogger(__name__)
+
+
 class TestSwarmHandlers(unittest.TestCase):
 
     def test_a_config(self):
-        print('EXECUTING SWARM CONFIG TEST')
+        log.info('EXECUTING SWARM CONFIG TEST')
         cwd = TestTools.ChangeToSampleFolderAndGetCwd()
         arguments = ['-config', '-create', 'all']
         SwarmConfigs.HandleConfigs(arguments)
@@ -22,10 +26,10 @@ class TestSwarmHandlers(unittest.TestCase):
         arguments = ['-config', '-rm', 'site.conf']
         SwarmConfigs.HandleConfigs(arguments)
         os.chdir(cwd)
-        print('DONE EXECUTING SWARM CONFIG TEST')
+        log.info('DONE EXECUTING SWARM CONFIG TEST')
 
     def test_b_secret(self):
-        print('EXECUTING SWARM SECRET TEST')
+        log.info('EXECUTING SWARM SECRET TEST')
         cwd = TestTools.ChangeToSampleFolderAndGetCwd()
         arguments = ['-secret', '-create', 'all']
         SwarmSecrets.HandleSecrets(arguments)
@@ -36,10 +40,10 @@ class TestSwarmHandlers(unittest.TestCase):
         arguments = ['-secret', '-rm', 'site.key']
         SwarmSecrets.HandleSecrets(arguments)
         os.chdir(cwd)
-        print('DONE EXECUTING SWARM SECRET TEST')
+        log.info('DONE EXECUTING SWARM SECRET TEST')
 
     def test_c_networks(self):
-        print('EXECUTING SWARM NETWORK TEST')
+        log.info('EXECUTING SWARM NETWORK TEST')
         cwd = TestTools.ChangeToSampleFolderAndGetCwd()
         arguments = ['-network', '-create', 'all']
         SwarmNetworks.HandleNetworks(arguments)
@@ -50,10 +54,10 @@ class TestSwarmHandlers(unittest.TestCase):
         arguments = ['-network', '-rm', 'frontend_network']
         SwarmNetworks.HandleNetworks(arguments)
         os.chdir(cwd)
-        print('DONE EXECUTING SWARM NETWORK TEST')
+        log.info('DONE EXECUTING SWARM NETWORK TEST')
 
     def test_d_volumes(self):
-        print('EXECUTING SWARM VOLUMES TEST')
+        log.info('EXECUTING SWARM VOLUMES TEST')
         cwd = TestTools.ChangeToSampleFolderAndGetCwd()
         arguments = ['-volume', '-create', 'all']
         SwarmVolumes.HandleVolumes(arguments)
@@ -64,10 +68,10 @@ class TestSwarmHandlers(unittest.TestCase):
         arguments = ['-volume', '-rm', 'first_volume']
         SwarmVolumes.HandleVolumes(arguments)
         os.chdir(cwd)
-        print('DONE EXECUTING SWARM VOLUMES TEST')
+        log.info('DONE EXECUTING SWARM VOLUMES TEST')
 
     def test_e_manager(self):
-        print('EXECUTING SWARM MANAGER TEST')
+        log.info('EXECUTING SWARM MANAGER TEST')
         cwd = TestTools.ChangeToSampleFolderAndGetCwd()
         arguments = ['-start']
         SwarmManager.HandleManagement(arguments)
@@ -82,10 +86,10 @@ class TestSwarmHandlers(unittest.TestCase):
         arguments = ['-stop']
         SwarmManager.HandleManagement(arguments)
         os.chdir(cwd)
-        print('DONE EXECUTING SWARM MANAGER TEST')
+        log.info('DONE EXECUTING SWARM MANAGER TEST')
 
     def test_f_stacks(self):
-        print('EXECUTING SWARM STACKS TEST')
+        log.info('EXECUTING SWARM STACKS TEST')
         cwd = TestTools.ChangeToSampleFolderAndGetCwd()
         arguments = ['-start']
         SwarmManager.HandleManagement(arguments)
@@ -100,7 +104,7 @@ class TestSwarmHandlers(unittest.TestCase):
         arguments = ['-stop']
         SwarmManager.HandleManagement(arguments)
         os.chdir(cwd)
-        print('DONE EXECUTING SWARM STACKS TEST')
+        log.info('DONE EXECUTING SWARM STACKS TEST')
 
 if __name__ == '__main__':
     unittest.main()

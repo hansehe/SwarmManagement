@@ -1,6 +1,9 @@
 from SwarmManagement import SwarmTools
 from DockerBuildSystem import DockerSwarmTools, YamlTools
 import sys
+import logging
+
+log = logging.getLogger(__name__)
 
 
 def GetInfoMsg():
@@ -60,7 +63,7 @@ def HandleVolumes(arguments):
         return
 
     if '-help' in arguments:
-        print(GetInfoMsg())
+        log.info(GetInfoMsg())
         return
         
     volumesToCreate = SwarmTools.GetArgumentValues(arguments, '-create')

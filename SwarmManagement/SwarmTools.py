@@ -1,7 +1,10 @@
 import time
 import os
 import sys
+import logging
 from DockerBuildSystem import TerminalTools, YamlTools
+
+log = logging.getLogger(__name__)
 
 DEFAULT_ENVIRONMENT_FILE = '.env'
 DEFAULT_SWARM_MANAGEMENT_YAML_FILES = [
@@ -57,7 +60,7 @@ def AssertYamlFilesExists(yamlFiles, defaultYamlFiles=DEFAULT_SWARM_MANAGEMENT_Y
             existingYamlFiles.append(yamlFile)
     
     if len(existingYamlFiles) == 0:
-        print(GetNoYmlFilesFoundMsg(defaultYamlFiles))
+        log.info(GetNoYmlFilesFoundMsg(defaultYamlFiles))
         exit(-1)
 
     return existingYamlFiles
@@ -133,7 +136,7 @@ def TimeoutCounter(secTimeout):
         timeLeft = secTimeout - int(elapsedTime)
         if timeLeft < printedTime:
             printedTime = timeLeft
-            print("Restarting Swarm in %d seconds" % printedTime)
+            log.info("Restarting Swarm in %d seconds" % printedTime)
         elapsedTime = time.time() - startTime
 
 
